@@ -264,13 +264,13 @@ async def _auth_gmail() -> int:
 
 
 def _configure_logging(level: str) -> None:
-    logging.basicConfig(format="%(message)s", level=level.upper())
+    logging.basicConfig(format="%(message)s", level=level.upper(), stream=sys.stdout, force=True)
     structlog.configure(
         processors=[
             structlog.contextvars.merge_contextvars,
             structlog.processors.add_log_level,
             structlog.processors.TimeStamper(fmt="iso"),
-            structlog.processors.JSONRenderer(),
+            structlog.dev.ConsoleRenderer(),
         ],
         wrapper_class=structlog.make_filtering_bound_logger(getattr(logging, level.upper())),
         cache_logger_on_first_use=True,

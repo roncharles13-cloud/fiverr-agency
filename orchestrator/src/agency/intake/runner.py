@@ -64,13 +64,17 @@ class IntakeRunner:
         message_ids = await self._gmail.list_pending_message_ids(max_results=limit)
 
         result = IntakeRunResult()
+        print(f"[INTAKE] Processing {len(message_ids)} pending messages", flush=True)
         for mid in message_ids:
             result.processed += 1
             try:
+                print(f"[INTAKE] Fetching email {mid}...", flush=True)
                 email = await self._gmail.fetch_email(mid)
+                print(f"[INTAKE] Parsing email: subject={email.subject!r}, sender={email.sender}", flush=True)
                 order_id = await self._parser.process_email(email)
                 await self._gmail.mark_processed(mid)
                 result.succeeded += 1
+                print(f"[INTAKE] SUCCESS: order_id={order_id}", flush=True)
                 logger.info(
                     "intake.runner.message_succeeded",
                     message_id=mid,
@@ -97,6 +101,9 @@ class IntakeRunner:
                 result.error_summaries.append(
                     f"{mid}: {type(exc).__name__}: {exc}"
                 )
+                import traceback
+                print(f"[INTAKE] TRANSIENT ERROR for {mid}: {type(exc).__name__}: {exc}", flush=True)
+                traceback.print_exc()
                 logger.exception(
                     "intake.runner.transient_failure",
                     message_id=mid,
@@ -125,6 +132,9 @@ class IntakeRunner:
             except asyncio.CancelledError:
                 logger.info("intake.runner.loop_cancelled")
                 raise
-            except Exception:
+            except Exception as exc:
+                import traceback
+                print(f"[INTAKE] CYCLE ERROR: {type(exc).__name__}: {exc}", flush=True)
+                traceback.print_exc()
                 logger.exception("intake.runner.cycle_errored")
             await asyncio.sleep(interval)
