@@ -11,7 +11,7 @@
 # reuse the cache while the container disk persists.
 
 [phases.setup]
-nixPkgs = ["python312", "gcc"]
+nixPkgs = ["python312", "python312Packages.pip", "gcc"]
 
 [phases.install]
-cmds = ["python3.12 -m venv /opt/venv && /opt/venv/bin/pip install -e ."]
+cmds = ["pip install --break-system-packages -e ."]
