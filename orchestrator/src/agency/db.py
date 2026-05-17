@@ -76,7 +76,7 @@ class Database:
             .single()
             .execute()
         )
-        if result.data is None:
+        if result is None or result.data is None:
             raise LookupError(f"Agent not found: {agent_key}")
         return result.data
 
@@ -115,6 +115,8 @@ class Database:
             .maybe_single()
             .execute()
         )
+        if result is None:
+            return None
         return result.data
 
     async def find_order_by_idempotency_key(self, key: str) -> dict[str, Any] | None:
@@ -126,6 +128,8 @@ class Database:
             .maybe_single()
             .execute()
         )
+        if result is None:
+            return None
         return result.data
 
     async def create_order(
