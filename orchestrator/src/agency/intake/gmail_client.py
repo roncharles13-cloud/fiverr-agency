@@ -76,6 +76,17 @@ class GmailClient:
         from googleapiclient.discovery import build
 
         def _load_credentials() -> Credentials:
+            import os, pathlib
+            # Bootstrap credential files from env vars when running in containers.
+            for env_var, file_path in [
+                ("GMAIL_TOKEN_JSON", settings.gmail_token_file),
+                ("GMAIL_CREDENTIALS_JSON", settings.gmail_credentials_file),
+            ]:
+                val = os.environ.get(env_var)
+                if val and not pathlib.Path(file_path).exists():
+                    pathlib.Path(file_path).parent.mkdir(parents=True, exist_ok=True)
+                    pathlib.Path(file_path).write_text(val, encoding="utf-8")
+
             creds = Credentials.from_authorized_user_file(
                 settings.gmail_token_file, GMAIL_SCOPES
             )
