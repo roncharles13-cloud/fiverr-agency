@@ -11,7 +11,7 @@
 # reuse the cache while the container disk persists.
 
 [phases.setup]
-nixPkgs = ["python312", "gcc"]
+nixPkgs = ["python312", "python312Packages.pip", "gcc"]
 
 [phases.install]
-cmds = ["python -m pip install --upgrade pip && pip install -e ."]
+cmds = ["pip install -e ."]
