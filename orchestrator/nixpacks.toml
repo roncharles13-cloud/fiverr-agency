@@ -9,9 +9,14 @@
 # The first run of `agency intake-loop` will trigger rembg's ONNX model
 # download (~150 MB cached to /root/.u2net by default). Subsequent restarts
 # reuse the cache while the container disk persists.
+#
+# AGENCY_CMD env var controls which subcommand to run (set per Railway service).
 
 [phases.setup]
 nixPkgs = ["python312", "python312Packages.pip", "gcc"]
 
 [phases.install]
 cmds = ["pip install --break-system-packages -e ."]
+
+[start]
+cmd = "python -m agency ${AGENCY_CMD:-intake-loop}"
