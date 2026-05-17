@@ -6,7 +6,6 @@ build-backend = "hatchling.build"
 name = "agency"
 version = "0.1.0"
 description = "Orchestrator and agent runtime for the Fiverr AI Agency pipeline"
-readme = "README.md"
 requires-python = ">=3.12"
 license = { text = "MIT" }
 authors = [{ name = "Fiverr AI Agency" }]
