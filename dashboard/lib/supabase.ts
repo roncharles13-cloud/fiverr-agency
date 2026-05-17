@@ -97,6 +97,7 @@ export interface DeliveryPackage {
   delivery_message: string;
   upsell_suggestion: string | null;
   status: PackageStatus;
+  rejection_reason: string | null;
   created_at: string;
 }
 
