@@ -141,4 +141,4 @@ def _route_to_generation(
     state: WorkflowState,
 ) -> Literal["thumbnail", "social_graphic", "headshot", "logo", "business_design"]:
     # background_removal is routed before reaching this function.
-    return state["service_type"]  # type: ignore[return-value]
+    return state["service_type"]

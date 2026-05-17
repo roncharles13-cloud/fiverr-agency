@@ -173,7 +173,7 @@ def test_message_to_email_received_at_in_utc():
     message = _build_message(internal_date_ms=1747315200000)
     email = message_to_email(message)
     assert email.received_at.tzinfo is not None
-    assert email.received_at.isoformat() == "2025-05-15T12:00:00+00:00"
+    assert email.received_at.isoformat() == "2025-05-15T13:20:00+00:00"
 
 
 def test_message_to_email_handles_missing_payload():
