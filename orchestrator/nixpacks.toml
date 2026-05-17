@@ -14,4 +14,4 @@
 nixPkgs = ["python312", "python312Packages.pip", "gcc"]
 
 [phases.install]
-cmds = ["pip install -e ."]
+cmds = ["pip install --break-system-packages -e ."]
