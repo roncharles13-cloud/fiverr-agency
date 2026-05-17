@@ -24,10 +24,10 @@ from uuid import UUID
 
 import structlog
 
-from agency.agents.brief_clarification import BriefClarification
-from agency.agents.delivery_packager import DeliveryPackager
 from agency.agents.background_removal_agent import BackgroundRemovalAgent
+from agency.agents.brief_clarification import BriefClarification
 from agency.agents.business_design_generator import BusinessDesignGenerator
+from agency.agents.delivery_packager import DeliveryPackager
 from agency.agents.headshot_generator import HeadshotGenerator
 from agency.agents.logo_generator import LogoGenerator
 from agency.agents.prompt_engineering import PromptEngineering
@@ -131,7 +131,7 @@ async def _build_intake_runtime() -> IntakeRuntime:
 def _initial_state(order: dict[str, Any]) -> WorkflowState:
     """Build the LangGraph initial state from a Supabase order row."""
     refs = order.get("reference_images") or []
-    return WorkflowState(  # type: ignore[typeddict-item]
+    return WorkflowState(
         order_id=UUID(order["id"]),
         service_type=order["service_type"],
         brief=order["brief"],

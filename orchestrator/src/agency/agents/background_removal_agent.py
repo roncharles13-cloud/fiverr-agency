@@ -15,7 +15,6 @@ subsequent ones are fast (~2-5s per image).
 from __future__ import annotations
 
 import asyncio
-from uuid import UUID
 
 import httpx
 

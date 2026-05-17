@@ -5,8 +5,8 @@ Public surface kept intentionally small; import from submodules for the rest.
 
 from agency.agents.base import Agent
 from agency.agents.brief_clarification import BriefClarification
-from agency.agents.delivery_packager import DeliveryPackager
 from agency.agents.business_design_generator import BusinessDesignGenerator
+from agency.agents.delivery_packager import DeliveryPackager
 from agency.agents.headshot_generator import HeadshotGenerator
 from agency.agents.prompt_engineering import PromptEngineering
 from agency.agents.social_graphics_generator import SocialGraphicsGenerator
@@ -32,6 +32,7 @@ __all__ = [
     "AgentRun",
     "AnthropicClient",
     "BriefClarification",
+    "BusinessDesignGenerator",
     "CompletionResult",
     "Database",
     "DeliveryPackager",
@@ -40,14 +41,13 @@ __all__ = [
     "GeneratedImage",
     "GenerationResult",
     "GmailClient",
+    "HeadshotGenerator",
     "IntakeExtractionError",
     "IntakeParser",
     "IntakeRunResult",
     "IntakeRunner",
     "ParsedOrder",
     "PromptEngineering",
-    "BusinessDesignGenerator",
-    "HeadshotGenerator",
     "Settings",
     "SocialGraphicsGenerator",
     "StoredFile",

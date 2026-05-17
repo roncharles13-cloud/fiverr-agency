@@ -34,12 +34,13 @@ class Agent(ABC):
         # Only enforce agent_key on concrete classes that explicitly declare it.
         # Abstract intermediate bases (e.g. GenerationAgentBase) omit agent_key
         # from their own __dict__ and are skipped here.
-        if "agent_key" in cls.__dict__:
-            if not isinstance(cls.agent_key, str) or not cls.agent_key:
-                raise TypeError(
-                    f"{cls.__name__} must declare a non-empty `agent_key` class variable "
-                    f"matching a row in the `agents` table."
-                )
+        if "agent_key" in cls.__dict__ and (
+            not isinstance(cls.agent_key, str) or not cls.agent_key
+        ):
+            raise TypeError(
+                f"{cls.__name__} must declare a non-empty `agent_key` class variable "
+                f"matching a row in the `agents` table."
+            )
 
     async def __call__(self, state: WorkflowState) -> WorkflowState:
         """LangGraph node entry point.

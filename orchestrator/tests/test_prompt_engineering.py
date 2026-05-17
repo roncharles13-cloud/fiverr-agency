@@ -15,8 +15,8 @@ from unittest.mock import AsyncMock
 import pytest
 
 from agency.agents.prompt_engineering import (
-    PromptEngineering,
     _SYSTEM_PROMPTS,
+    PromptEngineering,
     _build_user_prompt,
 )
 from tests.conftest import make_state

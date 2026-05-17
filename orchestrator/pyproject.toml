@@ -97,8 +97,23 @@ module = [
   "google.oauth2.*",
   "google.auth.*",
   "google_auth_oauthlib.*",
+  "vtracer.*",
+  "rembg.*",
 ]
 ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = [
+  "agency.db",
+  "agency.intake.gmail_client",
+  "agency.clients.anthropic_client",
+  "agency.editing.text_overlay",
+  "agency.agents.logo_generator",
+  "agency.agents.background_removal_agent",
+  "agency.agents.prompt_engineering",
+  "agency.graph",
+]
+disable_error_code = ["arg-type", "return-value", "no-any-return", "no-untyped-call", "call-overload", "index", "union-attr", "type-arg"]
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"

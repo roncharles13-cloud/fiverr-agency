@@ -20,7 +20,6 @@ from agency.agents.text_renderer import TextRenderer
 from agency.storage.supabase_storage import StoredFile, SupabaseStorage
 from tests.conftest import make_state
 
-
 ORDER_ID = UUID("00000000-0000-0000-0000-0000000000b0")
 PARENT_IDS = [
     UUID("00000000-0000-0000-0000-00000000a001"),

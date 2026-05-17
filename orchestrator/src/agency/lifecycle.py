@@ -20,6 +20,7 @@ LangGraph can decide whether to retry.
 
 from __future__ import annotations
 
+from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 from typing import Any
 from uuid import UUID
@@ -84,7 +85,7 @@ async def agent_lifecycle(
     db: Database,
     agent_key: str,
     order_id: UUID | None = None,
-):  # noqa: ANN201
+) -> AsyncIterator[AgentRun]:
     """Manage the full execution lifecycle of one agent run.
 
     Yields an `AgentRun` that the caller populates. On clean exit the run is

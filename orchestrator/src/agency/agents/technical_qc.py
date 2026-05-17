@@ -115,7 +115,7 @@ def _check(blob: bytes, *, expected: tuple[int, int] | None) -> list[str]:
 
     try:
         info = inspect_image(blob)
-    except Exception as exc:  # noqa: BLE001 — Pillow raises a zoo of types
+    except Exception as exc:
         failures.append(f"image decode failed: {type(exc).__name__}: {exc}")
         return failures
 

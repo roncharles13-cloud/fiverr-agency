@@ -20,7 +20,7 @@ from __future__ import annotations
 
 import asyncio
 import base64
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from html.parser import HTMLParser
 from typing import TYPE_CHECKING, Any
 
@@ -76,7 +76,8 @@ class GmailClient:
         from googleapiclient.discovery import build
 
         def _load_credentials() -> Credentials:
-            import os, pathlib
+            import os
+            import pathlib
             # Bootstrap credential files from env vars when running in containers.
             for env_var, file_path in [
                 ("GMAIL_TOKEN_JSON", settings.gmail_token_file),
@@ -144,8 +145,12 @@ class GmailClient:
             return creds.to_json()
 
         token_json = await asyncio.to_thread(_run_flow)
-        with open(settings.gmail_token_file, "w", encoding="utf-8") as fh:
-            fh.write(token_json)
+
+        def _write_token() -> None:
+            with open(settings.gmail_token_file, "w", encoding="utf-8") as fh:
+                fh.write(token_json)
+
+        await asyncio.to_thread(_write_token)
         logger.info("gmail.auth_complete", token_file=settings.gmail_token_file)
 
     # ── Read operations ─────────────────────────────────────────────────
@@ -236,7 +241,7 @@ def message_to_email(message: dict[str, Any]) -> FiverrEmail:
         body_plain = _strip_html(body_html)
 
     internal_date_ms = int(message.get("internalDate", "0"))
-    received_at = datetime.fromtimestamp(internal_date_ms / 1000, tz=timezone.utc)
+    received_at = datetime.fromtimestamp(internal_date_ms / 1000, tz=UTC)
 
     return FiverrEmail(
         message_id=headers.get("message-id") or message.get("id", ""),

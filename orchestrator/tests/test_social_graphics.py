@@ -20,7 +20,6 @@ from agency.clients.fal_client import FalClient, GeneratedImage, GenerationResul
 from agency.storage.supabase_storage import StoredFile, SupabaseStorage
 from tests.conftest import make_state
 
-
 # ── Aspect inference ────────────────────────────────────────────────────────
 
 
@@ -132,7 +131,7 @@ async def test_social_graphics_generator_runs_base_loop_with_inferred_size(
             for i in range(3)
         ),
         seed=99,
-        cost_usd=0.24,  # 3 × 2 MP × $0.04 for square_hd
+        cost_usd=0.24,  # 3 x 2 MP x $0.04 for square_hd
         prompt="test",
     )
 

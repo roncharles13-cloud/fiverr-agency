@@ -12,7 +12,7 @@ orchestration — fetch, parse, label — and the test contract is that:
 from __future__ import annotations
 
 import asyncio
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from unittest.mock import AsyncMock, MagicMock
 from uuid import UUID
 
@@ -29,7 +29,7 @@ ORDER_ID = UUID("00000000-0000-0000-0000-0000000000f0")
 def _email(message_id: str) -> FiverrEmail:
     return FiverrEmail(
         message_id=message_id,
-        received_at=datetime(2026, 5, 15, 12, 0, tzinfo=timezone.utc),
+        received_at=datetime(2026, 5, 15, 12, 0, tzinfo=UTC),
         subject="New order",
         sender="noreply@fiverr.com",
         body_plain="Need a thumbnail for my gaming channel about Minecraft speedruns.",

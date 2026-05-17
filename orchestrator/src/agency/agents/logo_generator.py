@@ -1,7 +1,7 @@
 """Logo Generator — raster concept generation + SVG vectorization.
 
 Two-stage per variant:
-  1. Generate with Flux (square_hd / 1024×1024, solid background, flat shapes).
+  1. Generate with Flux (square_hd / 1024x1024, solid background, flat shapes).
   2. Vectorize the raster to SVG via vtracer.
   3. Upload both files; create a deliverable row for each.
 
@@ -22,7 +22,6 @@ from __future__ import annotations
 import asyncio
 import os
 import tempfile
-from uuid import UUID
 
 from agency.agents.base import Agent
 from agency.clients.fal_client import FalClient
@@ -32,7 +31,7 @@ from agency.lifecycle import AgentRun
 from agency.state import WorkflowState
 from agency.storage.supabase_storage import SupabaseStorage
 
-_IMAGE_SIZE = "square_hd"   # 1024×1024 — best for flat logo shapes
+_IMAGE_SIZE = "square_hd"   # 1024x1024 -- best for flat logo shapes
 _NUM_VARIANTS = 2
 _VTRACER_PARAMS = {
     "colormode": "color",

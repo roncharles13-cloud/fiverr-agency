@@ -17,10 +17,8 @@ from uuid import UUID
 import pytest
 
 from agency.agents.visual_qc import VisualQC
-from agency.clients.anthropic_client import AnthropicClient
 from agency.storage.supabase_storage import SupabaseStorage
 from tests.conftest import make_state
-
 
 ORDER_ID = UUID("00000000-0000-0000-0000-0000000000b0")
 D1, D2 = UUID("00000000-0000-0000-0000-00000000a001"), UUID("00000000-0000-0000-0000-00000000a002")

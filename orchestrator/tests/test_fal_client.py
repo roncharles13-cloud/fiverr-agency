@@ -17,7 +17,6 @@ from agency.clients.fal_client import (
     _parse_generation_response,
 )
 
-
 # ── Cost computation ────────────────────────────────────────────────────────
 
 
@@ -93,6 +92,7 @@ def test_size_presets_cover_all_image_size_literal():
     """Every value of the ImageSize Literal must exist in SIZE_PRESETS."""
     # Get the literal options from the type alias
     from typing import get_args
+
     from agency.clients.fal_client import ImageSize
 
     for value in get_args(ImageSize):

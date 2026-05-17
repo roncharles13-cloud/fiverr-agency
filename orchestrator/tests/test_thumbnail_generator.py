@@ -20,7 +20,6 @@ from agency.clients.fal_client import FalClient, GeneratedImage, GenerationResul
 from agency.storage.supabase_storage import StoredFile, SupabaseStorage
 from tests.conftest import make_state
 
-
 DELIVERABLE_IDS = [
     UUID("00000000-0000-0000-0000-00000000d001"),
     UUID("00000000-0000-0000-0000-00000000d002"),

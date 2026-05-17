@@ -10,8 +10,6 @@ from __future__ import annotations
 
 import base64
 
-import pytest
-
 from agency.intake.email_models import FiverrEmail
 from agency.intake.gmail_client import (
     _extract_mime_text,

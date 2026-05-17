@@ -11,11 +11,11 @@ Mocks the Anthropic client and the Database. Verifies:
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
+from unittest.mock import AsyncMock
 from uuid import UUID
 
 import pytest
-from unittest.mock import AsyncMock
 
 from agency.intake.email_models import FiverrEmail
 from agency.intake.parser import IntakeExtractionError, IntakeParser
@@ -29,7 +29,7 @@ EXISTING_MESSAGE_ID = "<existing@gmail>"
 def email() -> FiverrEmail:
     return FiverrEmail(
         message_id="<msg-abc-123@mail.gmail.com>",
-        received_at=datetime(2026, 5, 14, 12, 0, tzinfo=timezone.utc),
+        received_at=datetime(2026, 5, 14, 12, 0, tzinfo=UTC),
         subject="New order: YouTube thumbnail for gaming channel",
         sender="noreply@fiverr.com",
         body_plain=(

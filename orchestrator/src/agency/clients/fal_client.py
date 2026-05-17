@@ -15,14 +15,13 @@ from __future__ import annotations
 import math
 import os
 from dataclasses import dataclass
-from typing import Any, Literal
+from typing import Any, ClassVar, Literal
 
 import httpx
 
 # fal_client is imported lazily inside methods so the orchestrator module
 # can be imported in environments where fal-client isn't installed
 # (e.g. dashboard build environments).
-
 from agency.config import Settings
 
 ImageSize = Literal[
@@ -65,7 +64,7 @@ class FalClient:
 
     # Pixel dimensions for each `image_size` preset, used for cost computation.
     # fal accepts custom dicts too, but presets cover thumbnails / posts / etc.
-    SIZE_PRESETS: dict[ImageSize, tuple[int, int]] = {
+    SIZE_PRESETS: ClassVar[dict[ImageSize, tuple[int, int]]] = {
         "square_hd": (1024, 1024),
         "square": (512, 512),
         "portrait_4_3": (768, 1024),

@@ -7,12 +7,12 @@ import io
 import pytest
 from PIL import Image
 
+from agency.agents.technical_qc import _check
 from agency.editing import (
     TextOverlayStyle,
     inspect_image,
     render_text_overlay,
 )
-from agency.agents.technical_qc import _check
 
 
 def _make_jpeg(width: int, height: int, color: tuple[int, int, int] = (40, 80, 160)) -> bytes:
@@ -35,7 +35,9 @@ def test_inspect_image_reads_dimensions_and_format():
 
 
 def test_inspect_image_raises_on_garbage():
-    with pytest.raises(Exception):
+    from PIL import UnidentifiedImageError
+
+    with pytest.raises((UnidentifiedImageError, OSError)):
         inspect_image(b"not an image")
 
 

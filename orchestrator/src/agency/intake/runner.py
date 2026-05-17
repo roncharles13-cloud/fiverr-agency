@@ -91,7 +91,7 @@ class IntakeRunner:
                     await self._gmail.mark_failed(mid)
                 except Exception:
                     logger.exception("intake.runner.mark_failed_errored", message_id=mid)
-            except Exception as exc:  # noqa: BLE001 — we want to swallow per-email errors
+            except Exception as exc:
                 # Transient — leave label as Pending; retry next cycle.
                 result.failed_transient += 1
                 result.error_summaries.append(
@@ -125,6 +125,6 @@ class IntakeRunner:
             except asyncio.CancelledError:
                 logger.info("intake.runner.loop_cancelled")
                 raise
-            except Exception:  # noqa: BLE001 — cycle-level guard
+            except Exception:
                 logger.exception("intake.runner.cycle_errored")
             await asyncio.sleep(interval)
