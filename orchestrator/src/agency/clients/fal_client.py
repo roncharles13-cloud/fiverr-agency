@@ -68,9 +68,9 @@ class FalClient:
         "square_hd": (1024, 1024),
         "square": (512, 512),
         "portrait_4_3": (768, 1024),
-        "portrait_16_9": (720, 1280),
+        "portrait_16_9": (576, 1024),
         "landscape_4_3": (1024, 768),
-        "landscape_16_9": (1280, 720),
+        "landscape_16_9": (1024, 576),  # fal Flux Pro 1.1 actual output
     }
 
     def __init__(self, endpoint: str) -> None:

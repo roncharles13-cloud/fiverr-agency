@@ -29,11 +29,11 @@ from agency.storage.supabase_storage import SupabaseStorage
 # (0, 0) skips dimension checking — used for services with variable aspect
 # ratios where the generator's own preset is the source of truth.
 _EXPECTED_DIMENSIONS: dict[ServiceType, tuple[int, int]] = {
-    "thumbnail": (1280, 720),
+    "thumbnail": (1024, 576),     # fal Flux Pro 1.1 landscape_16_9 actual output
     "social_graphic": (0, 0),    # multi-platform: square / portrait / landscape
     "headshot": (768, 1024),      # portrait_4_3 preset
     "logo": (1024, 1024),
-    "business_design": (1280, 720),
+    "business_design": (1024, 576),
     "background_removal": (0, 0), # variable input → variable output
 }
 
